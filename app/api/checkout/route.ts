@@ -3,14 +3,20 @@ import DodoPayments from "dodopayments";
 
 const dodo = new DodoPayments({
   bearerToken: process.env.DODO_PAYMENTS_API_KEY!,
-  environment: "test_mode",
+  environment: "live_mode",
 });
 
 export async function POST(req: NextRequest) {
   const { email, name } = await req.json();
 
   const payment = await dodo.payments.create({
-    billing: { city: "NA", country: "IN", state: "NA", street: "NA", zipcode: 800001 },
+    billing: {
+      city: "NA",
+      country: "IN",
+      state: "NA",
+      street: "NA",
+      zipcode: "800001",
+    },
     customer: { email, name },
     payment_link: true,
     product_cart: [{ product_id: process.env.DODO_PRODUCT_ID!, quantity: 1 }],
