@@ -1,0 +1,99 @@
+import { Webhooks } from "@dodopayments/nextjs";
+import dbConnect from "@/lib/mongodb";
+import License from "@/models/License";
+import { generateLicenseKey } from "@/lib/license";
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY!);
+
+export const POST = Webhooks({
+  webhookKey: process.env.DODO_PAYMENTS_WEBHOOK_KEY!,
+
+  onPayload: async (payload: any) => {
+
+    // Sirf payment.succeeded handle karo — kuch aur nahi
+    if (payload.type !== "payment.succeeded") {
+      console.log(`[Webhook] Ignoring event: ${payload.type}`);
+      return;
+    }
+
+    try {
+      await dbConnect();
+
+      const email = payload.data.customer.email;
+      const name = payload.data.customer.name || "User";
+      const paymentId = payload.data.payment_id;
+
+      // Duplicate check — ek payment pe ek hi key
+      const existing = await License.findOne({ paymentId });
+      if (existing) {
+        console.log(`[Webhook] Already processed: ${paymentId}`);
+        return;
+      }
+
+      // License key generate karo
+      const key = generateLicenseKey();
+
+      // MongoDB mein save karo
+      await License.create({
+        key,
+        email,
+        paymentId,
+        activated: false,
+        createdAt: new Date(),
+      });
+
+      console.log(`[Webhook] License created: ${key} for ${email}`);
+
+      // Email bhejo
+      await resend.emails.send({
+        from: "SlapWindows <noreply@yourdomain.com>",
+        to: email,
+        subject: "👋 Your SlapWindows License Key",
+        html: `
+          <!DOCTYPE html>
+          <html>
+          <body style="background:#0a0a0a; color:#ffffff; font-family:system-ui,sans-serif; padding:40px; max-width:500px; margin:0 auto;">
+            
+            <h1 style="font-size:2rem; font-weight:700; margin-bottom:8px;">👋 SlapWindows</h1>
+            <p style="color:#888; margin-bottom:32px;">Your laptop is about to get feelings.</p>
+            
+            <p style="color:#aaa; margin-bottom:12px;">Hey ${name}! Payment successful. Yahan hai teri license key:</p>
+            
+            <div style="background:#1a1a1a; border:1px solid #333; border-radius:10px; padding:20px; text-align:center; margin-bottom:32px;">
+              <p style="font-size:11px; color:#666; margin-bottom:8px; letter-spacing:1px;">LICENSE KEY</p>
+              <p style="font-size:1.4rem; font-weight:700; letter-spacing:4px; color:#e63535; font-family:monospace;">${key}</p>
+            </div>
+
+            <p style="color:#aaa; margin-bottom:16px; font-weight:600;">Steps:</p>
+            <ol style="color:#888; line-height:2.2; padding-left:20px;">
+              <li>SlapWindows.exe download karo</li>
+              <li>Open karo</li>
+              <li>Upar wali key paste karo</li>
+              <li>Apna laptop thappad maro 🎉</li>
+            </ol>
+
+            <a href="${process.env.NEXT_PUBLIC_DOWNLOAD_URL}" 
+               style="display:inline-block; background:#e63535; color:#fff; padding:14px 28px; border-radius:8px; text-decoration:none; font-weight:600; margin-top:24px;">
+              Download SlapWindows.exe
+            </a>
+
+            <hr style="border:none; border-top:1px solid #222; margin:32px 0;">
+            <p style="color:#555; font-size:12px;">
+              Koi problem? Reply karo is email pe.<br>
+              No refunds — as mentioned on website.
+            </p>
+
+          </body>
+          </html>
+        `,
+      });
+
+      console.log(`[Webhook] Email sent to ${email}`);
+
+    } catch (error) {
+      console.error("[Webhook] Error:", error);
+      throw error; // Dodo ko retry karne do
+    }
+  },
+});
