@@ -404,19 +404,19 @@ export default function Home() {
             built with 👋 by amitkushh
           </a>
           <a
-            href="#"
+            href="privacy"
             className="text-[#999] no-underline mx-2 hover:text-[#555] transition-colors"
           >
             Privacy
           </a>
           <a
-            href="#"
+            href="terms"
             className="text-[#999] no-underline mx-2 hover:text-[#555] transition-colors"
           >
             Terms
           </a>
           <a
-            href="#"
+            href="https://x.com/amitkushh/"
             className="text-[#999] no-underline mx-2 hover:text-[#555] transition-colors"
           >
             Support
