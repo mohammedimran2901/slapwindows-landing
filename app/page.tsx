@@ -9,8 +9,6 @@ export default function Home() {
   const [slapCount, setSlapCount] = useState(1247839);
   const [slapPopup, setSlapPopup] = useState("");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-  const [sensitivity, setSensitivity] = useState(5);
-  const [cooldown, setCooldown] = useState(3);
 
   const sounds = [
     "OUCH!!",
@@ -23,12 +21,12 @@ export default function Home() {
 
   const packs = [
     { emoji: "💋", name: "Sexy", desc: "Use headphones" },
-    { emoji: "🐐", name: "Goat", desc: "20 clips" },
-    { emoji: "😤", name: "Angry", desc: "18 clips" },
-    { emoji: "😭", name: "Dramatic", desc: "22 clips" },
-    { emoji: "🤖", name: "Robot", desc: "15 clips" },
-    { emoji: "👶", name: "Baby", desc: "17 clips" },
-    { emoji: "🎙", name: "Commentator", desc: "21 clips" },
+    { emoji: "🥊", name: "Combo Hit" },
+    { emoji: "👨", name: "Male" },
+    { emoji: "💨", name: "Fart" },
+    { emoji: "🎩", name: "Gentleman" },
+    { emoji: "🌸", name: "Yamete" },
+    { emoji: "🐐", name: "Goat" },
   ];
 
   const faqs = [
@@ -77,14 +75,25 @@ export default function Home() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email }),
       });
+
+      if (!res.ok) {
+        throw new Error("Server error");
+      }
+
       const data = await res.json();
+
+      if (!data.checkout_url) {
+        throw new Error("No checkout URL");
+      }
+
       window.location.href = data.checkout_url;
     } catch {
-      alert("Something went wrong. Please try again.");
+      alert(
+        "Something went wrong. Please try again or contact support@slapwindows.com",
+      );
       setLoading(false);
     }
   };
-
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
@@ -154,13 +163,6 @@ export default function Home() {
         <p className="text-xs text-[#555] mt-4">
           Windows 10/11 · Microphone required
         </p>
-
-        <div className="inline-flex items-center gap-1.5 mt-3 text-xs text-[#777]">
-          Total slaps:{" "}
-          <span className="text-[#e63535] font-medium">
-            {slapCount.toLocaleString()}
-          </span>
-        </div>
       </section>
 
       {/* DEMO */}
@@ -199,17 +201,12 @@ export default function Home() {
       </section>
 
       {/* FEATURES STRIP */}
-      <section className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 border-b border-[#e8c8c8]">
+      <section className="grid grid-cols-1 sm:grid-cols-3 border-b border-[#e8c8c8]">
         {[
           {
             icon: "🎙",
             title: "Mic detection",
             desc: "Detects slap via microphone",
-          },
-          {
-            icon: "🔊",
-            title: "Volume scales",
-            desc: "Harder slap = louder scream",
           },
           {
             icon: "🔧",
@@ -221,7 +218,6 @@ export default function Home() {
             title: "USB moaner",
             desc: "Reacts on plug/unplug too",
           },
-          { icon: "📊", title: "Slap counter", desc: "Tracks lifetime slaps" },
         ].map((f, i) => (
           <div
             key={i}
@@ -245,8 +241,7 @@ export default function Home() {
           Seven moods of protest
         </h2>
         <p className="text-sm sm:text-base text-[#666] mb-8 sm:mb-10 max-w-md mx-auto">
-          130+ sound clips across 7 voice packs. Your office will have
-          questions.
+          sound clips across 7 voice packs. Your office will have questions.
         </p>
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-2.5 max-w-2xl mx-auto">
           {packs.map((p, i) => (
@@ -263,64 +258,6 @@ export default function Home() {
               <div className="text-xs sm:text-[13px] font-medium">{p.name}</div>
               <div className="text-[10px] sm:text-[11px] text-[#555] mt-0.5">
                 {p.desc}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* SETTINGS SLIDERS */}
-      <section className="px-4 sm:px-8 py-12 sm:py-16 max-w-2xl mx-auto text-center">
-        <div className="bg-white rounded-3xl p-6 sm:p-10">
-          <p className="text-xs font-bold text-[#e63535] tracking-widest uppercase mb-3">
-            Settings
-          </p>
-          <h2 className="text-2xl sm:text-[1.8rem] font-semibold tracking-[-1px] mb-6 sm:mb-8">
-            Dial in your slap
-          </h2>
-
-          {[
-            {
-              label: "Sensitivity",
-              value: sensitivity,
-              setValue: setSensitivity,
-              min: 1,
-              max: 10,
-              display: String(sensitivity),
-              left: "Butterfly landing",
-              right: "Full commitment",
-            },
-            {
-              label: "Cooldown",
-              value: cooldown,
-              setValue: setCooldown,
-              min: 1,
-              max: 10,
-              display: (cooldown * 0.2).toFixed(1) + "s",
-              left: "Rapid-fire",
-              right: "Dramatic pauses",
-            },
-          ].map((s, i) => (
-            <div key={i} className="mb-6 text-left">
-              <div className="flex items-center gap-3 mb-1">
-                <span className="text-xs sm:text-[13px] text-[#999] w-24 shrink-0 font-medium">
-                  {s.label}
-                </span>
-                <input
-                  type="range"
-                  min={s.min}
-                  max={s.max}
-                  value={s.value}
-                  onChange={(e) => s.setValue(Number(e.target.value))}
-                  className="flex-1 accent-[#e63535]"
-                />
-                <span className="text-sm text-[#e63535] font-medium w-10 text-right shrink-0">
-                  {s.display}
-                </span>
-              </div>
-              <div className="flex justify-between text-[10px] sm:text-[11px] text-[#aaa] pl-26">
-                <span>{s.left}</span>
-                <span>{s.right}</span>
               </div>
             </div>
           ))}
@@ -364,7 +301,7 @@ export default function Home() {
           One-time. No subscriptions.
         </h2>
         <p className="text-sm sm:text-base text-[#666] mb-8 max-w-xs mx-auto">
-          Less than a chai. More fun than your antivirus.
+          Less than a coffee. More fun than your antivirus.
         </p>
 
         <div className="bg-white border border-[#ddd] rounded-2xl p-6 sm:p-10 max-w-sm mx-auto w-full">
@@ -378,7 +315,7 @@ export default function Home() {
 
           <ul className="list-none text-left mb-8">
             {[
-              "All 7 voice packs (130+ sounds)",
+              "All 7 voice packs",
               "USB Moaner mode",
               "Lifetime updates",
               "License key via email",
@@ -456,9 +393,16 @@ export default function Home() {
       </section>
 
       {/* FOOTER */}
-      <footer className="px-4 sm:px-8 py-8 text-center text-xs text-[#888] border-t border-[#e8c8c8]">
+      <footer className="px-4 sm:px-8 py-8 text-center text-md text-[#888] border-t border-[#e8c8c8]">
         <p>built with frustration by someone whose laptop had it coming</p>
         <p className="mt-2">
+          <a
+            href="https://x.com/amitkushh/"
+            target="_blank"
+            className="text-[#999] no-underline mx-2 hover:text-[#555] transition-colors"
+          >
+            built with 👋 by amitkushh
+          </a>
           <a
             href="#"
             className="text-[#999] no-underline mx-2 hover:text-[#555] transition-colors"
