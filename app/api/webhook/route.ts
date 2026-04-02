@@ -47,7 +47,7 @@ export const POST = Webhooks({
 
       // Email bhejo
       await resend.emails.send({
-        from: "SlapWindows <noreply@yourdomain.com>",
+        from: "SlapWindows <noreply@slapwindows.site>",
         to: email,
         subject: "👋 Your SlapWindows License Key",
         html: `

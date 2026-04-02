@@ -99,9 +99,9 @@ export default function Home() {
   };
 
   return (
-    <main className="bg-[#fdf8f8] text-black min-h-screen">
+    <main className="bg-[#faf8f8] text-black min-h-screen">
       {/* NAV */}
-      <nav className="flex justify-between items-center px-4 sm:px-8 py-4 sticky top-0 backdrop-blur-md z-100 border-b border-[#f0d0d0]">
+      <nav className="flex justify-between items-center px-4 sm:px-8 py-4 sticky top-0 backdrop-blur-md z-100">
         <div className="text-base sm:text-lg font-medium tracking-tight">
           SlapWindows
         </div>
@@ -118,6 +118,12 @@ export default function Home() {
           >
             Pricing
           </span>
+          <a
+            href="/guide"
+            style={{ fontSize: 13, color: "#666", textDecoration: "none" }}
+          >
+            📖 How to install →
+          </a>
           <button
             onClick={() => scrollTo("pricing")}
             className="bg-[#e63535] text-white border-none px-4 py-2 rounded-full text-xs sm:text-sm font-medium cursor-pointer hover:bg-[#cc2020] transition-colors whitespace-nowrap"
