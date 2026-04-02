@@ -1,5 +1,7 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
+import img from "../public/img.png";
 
 export default function Home() {
   const [name, setName] = useState("");
@@ -169,29 +171,20 @@ export default function Home() {
           >
             ✦ Windows version of SlapMac
           </div>
+          <div className="flex justify-center items-center">
+            <Image src={img} alt="img" height={700} width={700} />
+          </div>
 
           <h1
-            className="text-[2.6rem] sm:text-5xl font-bold tracking-[-2px] leading-[1.05] mb-4"
+            className="text-[2.6rem] sm:text-5xl font-bold tracking-[-2px] mb-4"
             style={{ letterSpacing: "-2.5px" }}
           >
-            Slap your
-            <br />
-            <span
-              style={{
-                background:
-                  "linear-gradient(135deg, #ff4444, #e63535, #e03030)",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-              }}
-            >
-              Windows laptop.
-            </span>
-            <br />
-            It screams back.
+            SlapWindows
           </h1>
 
-          <p className="text-base sm:text-lg text-[#777] mb-8 sm:mb-10 font-normal">
-            That&apos;s it. That&apos;s the app.
+          <p className="text-base sm:text-lg text-[#777] mb-8 sm:mb-10 font-normal mx-auto max-w-md">
+            Slap your Windows. It screams back. That&apos;s it. That&apos;s the
+            app.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center items-stretch sm:items-center">
@@ -216,9 +209,6 @@ export default function Home() {
           <p className="text-xs text-[#aaa] mt-4 font-medium">
             Windows 10/11 · Microphone required · One-time payment
           </p>
-
-          
-          
         </section>
 
         {/* DEMO */}
@@ -322,8 +312,7 @@ export default function Home() {
             Seven moods of protest
           </h2>
           <p className="text-sm sm:text-base text-[#999] mb-8 sm:mb-10 max-w-md mx-auto font-normal">
-            sound clips across 7 voice packs. Your office will have
-            questions.
+            sound clips across 7 voice packs. Your office will have questions.
           </p>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-2.5 max-w-2xl mx-auto">
             {packs.map((p, i) => (
