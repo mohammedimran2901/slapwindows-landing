@@ -4,7 +4,7 @@ type NoteType = "info" | "warning" | "tip";
 
 export default function GuidePage() {
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen bg-[#faf8f8]">
       <div className="max-w-180 mx-auto px-8 py-12">
 
         {/* Back */}
@@ -103,7 +103,7 @@ export default function GuidePage() {
           </p>
 
           <a
-            href="mailto:support@slapwindows.com"
+            href="mailto:support@slapwindows.site"
             className="inline-block bg-[#e63535] text-white px-7 py-3 rounded-lg text-sm font-medium hover:opacity-90 transition"
           >
             Contact Support
@@ -120,7 +120,7 @@ export default function GuidePage() {
           <div className="flex gap-6">
             <Link href="/privacy" className="text-[#666]">Privacy</Link>
             <Link href="/terms" className="text-[#666]">Terms</Link>
-            <a href="mailto:support@slapwindows.com" className="text-[#666]">Support</a>
+            <a href="mailto:support@slapwindows.site" className="text-[#666]">Support</a>
           </div>
         </div>
 
@@ -204,7 +204,7 @@ function SubStep({ n, text }: any) {
 function SpecRow({ label, value }: any) {
   return (
     <div className="flex gap-3 py-2 border-b border-[#111] text-sm">
-      <span className="text-[#555] min-w-[140px]">{label}</span>
+      <span className="text-[#555] min-w-35">{label}</span>
       <span className="text-[#aaa]">{value}</span>
     </div>
   );
@@ -213,8 +213,8 @@ function SpecRow({ label, value }: any) {
 function SettingRow({ name, desc }: any) {
   return (
     <div className="bg-[#111] border border-[#1a1a1a] rounded-lg px-4 py-3 mb-2">
-      <p className="text-sm font-semibold text-[#ddd]">{name}</p>
-      <p className="text-sm text-[#666]">{desc}</p>
+      <p className="text-sm font-semibold text-white">{name}</p>
+      <p className="text-sm text-white">{desc}</p>
     </div>
   );
 }
@@ -222,7 +222,7 @@ function SettingRow({ name, desc }: any) {
 function FaqItem({ q, children, last }: any) {
   return (
     <div className={`${!last ? "border-b border-[#1a1a1a]" : ""} py-5`}>
-      <p className="text-sm font-semibold text-[#ddd] mb-2">{q}</p>
+      <p className="text-sm font-semibold  mb-2">{q}</p>
       <p className="text-sm text-[#666]">{children}</p>
     </div>
   );

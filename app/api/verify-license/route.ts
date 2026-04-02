@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ valid: false }, { status: 404 });
   }
 
-  // Activate karo agar pehli baar hai
+  //Activate if it is the first time
   if (!license.activated) {
     license.activated = true;
     await license.save();

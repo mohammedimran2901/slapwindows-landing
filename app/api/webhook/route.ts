@@ -10,8 +10,7 @@ export const POST = Webhooks({
   webhookKey: process.env.DODO_PAYMENTS_WEBHOOK_KEY!,
 
   onPayload: async (payload: any) => {
-
-    // Sirf payment.succeeded handle karo — kuch aur nahi
+    // Only handle payment.succeeded - nothing else
     if (payload.type !== "payment.succeeded") {
       console.log(`[Webhook] Ignoring event: ${payload.type}`);
       return;
@@ -24,17 +23,17 @@ export const POST = Webhooks({
       const name = payload.data.customer.name || "User";
       const paymentId = payload.data.payment_id;
 
-      // Duplicate check — ek payment pe ek hi key
+      // Duplicate check — One payment per key
       const existing = await License.findOne({ paymentId });
       if (existing) {
         console.log(`[Webhook] Already processed: ${paymentId}`);
         return;
       }
 
-      // License key generate karo
+      // License key generate
       const key = generateLicenseKey();
 
-      // MongoDB mein save karo
+      // save to mongodb
       await License.create({
         key,
         email,
@@ -58,7 +57,7 @@ export const POST = Webhooks({
             <h1 style="font-size:2rem; font-weight:700; margin-bottom:8px;">👋 SlapWindows</h1>
             <p style="color:#888; margin-bottom:32px;">Your laptop is about to get feelings.</p>
             
-            <p style="color:#aaa; margin-bottom:12px;">Hey ${name}! Payment successful. Yahan hai teri license key:</p>
+            <p style="color:#aaa; margin-bottom:12px;">Hey ${name}! Payment successful. Here is your license Key:</p>
             
             <div style="background:#1a1a1a; border:1px solid #333; border-radius:10px; padding:20px; text-align:center; margin-bottom:32px;">
               <p style="font-size:11px; color:#666; margin-bottom:8px; letter-spacing:1px;">LICENSE KEY</p>
@@ -67,10 +66,10 @@ export const POST = Webhooks({
 
             <p style="color:#aaa; margin-bottom:16px; font-weight:600;">Steps:</p>
             <ol style="color:#888; line-height:2.2; padding-left:20px;">
-              <li>SlapWindows.exe download karo</li>
-              <li>Open karo</li>
-              <li>Upar wali key paste karo</li>
-              <li>Apna laptop thappad maro 🎉</li>
+              <li>SlapWindows.exe download it</li>
+              <li>Open it</li>
+              <li>Paste the upper key</li>
+              <li>slap your laptop 🎉</li>
             </ol>
 
             <a href="${process.env.NEXT_PUBLIC_DOWNLOAD_URL}" 
@@ -80,8 +79,7 @@ export const POST = Webhooks({
 
             <hr style="border:none; border-top:1px solid #222; margin:32px 0;">
             <p style="color:#555; font-size:12px;">
-              Koi problem? Reply karo is email pe.<br>
-              No refunds — as mentioned on website.
+              Any problems? Reply to this email.
             </p>
 
           </body>
@@ -90,10 +88,9 @@ export const POST = Webhooks({
       });
 
       console.log(`[Webhook] Email sent to ${email}`);
-
     } catch (error) {
       console.error("[Webhook] Error:", error);
-      throw error; // Dodo ko retry karne do
+      throw error;
     }
   },
 });
