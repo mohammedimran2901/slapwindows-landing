@@ -28,9 +28,15 @@ export async function POST(req: NextRequest) {
       await dbConnect();
 
       const order = event.data;
-      const email = order.customer.email;
-      const name = order.customer.name || "User";
+      const email = order.customer.email ?? "";
+      const name = order.customer.name ?? "User";
       const orderId = order.id;
+
+      // Skip if no email
+      if (!email) {
+        console.log("[Webhook] No email found, skipping");
+        return NextResponse.json({ received: true });
+      }
 
       // Duplicate check — One payment per key
       const existing = await License.findOne({ paymentId: orderId });
