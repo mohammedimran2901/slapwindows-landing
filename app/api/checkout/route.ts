@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
     const { email, name } = await req.json();
 
     const checkout = await polar.checkouts.create({
-      productId: process.env.POLAR_PRODUCT_ID!,
+      products: [process.env.POLAR_PRODUCT_ID!],  // ← productId → products array
       customerEmail: email,
       customerName: name,
       successUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/success?checkout_id={CHECKOUT_ID}`,
