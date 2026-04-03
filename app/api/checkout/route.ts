@@ -1,27 +1,24 @@
 import { NextRequest, NextResponse } from "next/server";
-import DodoPayments from "dodopayments";
+import { Polar } from "@polar-sh/sdk";
 
-const dodo = new DodoPayments({
-  bearerToken: process.env.DODO_PAYMENTS_API_KEY!,
-  environment: "live_mode",
+const polar = new Polar({
+  accessToken: process.env.POLAR_ACCESS_TOKEN!,
 });
 
 export async function POST(req: NextRequest) {
-  const { email, name } = await req.json();
+  try {
+    const { email, name } = await req.json();
 
-  const payment = await dodo.payments.create({
-    billing: {
-      city: "NA",
-      country: "IN",
-      state: "NA",
-      street: "NA",
-      zipcode: "800001",
-    },
-    customer: { email, name },
-    payment_link: true,
-    product_cart: [{ product_id: process.env.DODO_PRODUCT_ID!, quantity: 1 }],
-    return_url: process.env.DODO_PAYMENTS_RETURN_URL!,
-  });
+    const checkout = await polar.checkouts.create({
+      productId: process.env.POLAR_PRODUCT_ID!,
+      customerEmail: email,
+      customerName: name,
+      successUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/success?checkout_id={CHECKOUT_ID}`,
+    });
 
-  return NextResponse.json({ checkout_url: (payment as any).payment_link });
+    return NextResponse.json({ checkout_url: checkout.url });
+  } catch (error) {
+    console.error("[Checkout] Error:", error);
+    return NextResponse.json({ error: "Payment failed" }, { status: 500 });
+  }
 }

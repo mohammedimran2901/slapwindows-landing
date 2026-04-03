@@ -1,4 +1,5 @@
-import { Webhooks } from "@dodopayments/nextjs";
+import { NextRequest, NextResponse } from "next/server";
+import { validateEvent, WebhookVerificationError } from "@polar-sh/sdk/webhooks";
 import dbConnect from "@/lib/mongodb";
 import License from "@/models/License";
 import { generateLicenseKey } from "@/lib/license";
@@ -6,38 +7,46 @@ import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY!);
 
-export const POST = Webhooks({
-  webhookKey: process.env.DODO_PAYMENTS_WEBHOOK_KEY!,
+export async function POST(req: NextRequest) {
+  const body = await req.text();
+  const headers = Object.fromEntries(req.headers.entries());
 
-  onPayload: async (payload: any) => {
-    // Only handle payment.succeeded - nothing else
-    if (payload.type !== "payment.succeeded") {
-      console.log(`[Webhook] Ignoring event: ${payload.type}`);
-      return;
+  try {
+    const event = validateEvent(
+      body,
+      headers,
+      process.env.POLAR_WEBHOOK_SECRET!
+    );
+
+    // Only handle order.created — nothing else
+    if (event.type !== "order.created") {
+      console.log(`[Webhook] Ignoring event: ${event.type}`);
+      return NextResponse.json({ received: true });
     }
 
     try {
       await dbConnect();
 
-      const email = payload.data.customer.email;
-      const name = payload.data.customer.name || "User";
-      const paymentId = payload.data.payment_id;
+      const order = event.data;
+      const email = order.customer.email;
+      const name = order.customer.name || "User";
+      const orderId = order.id;
 
       // Duplicate check — One payment per key
-      const existing = await License.findOne({ paymentId });
+      const existing = await License.findOne({ paymentId: orderId });
       if (existing) {
-        console.log(`[Webhook] Already processed: ${paymentId}`);
-        return;
+        console.log(`[Webhook] Already processed: ${orderId}`);
+        return NextResponse.json({ received: true });
       }
 
       // License key generate
       const key = generateLicenseKey();
 
-      // save to mongodb
+      // Save to MongoDB
       await License.create({
         key,
         email,
-        paymentId,
+        paymentId: orderId,
         activated: false,
         createdAt: new Date(),
       });
@@ -57,7 +66,7 @@ export const POST = Webhooks({
             <h1 style="font-size:2rem; font-weight:700; margin-bottom:8px;">👋 SlapWindows</h1>
             <p style="color:#888; margin-bottom:32px;">Your laptop is about to get feelings.</p>
             
-            <p style="color:#aaa; margin-bottom:12px;">Hey ${name}! Payment successful. Here is your license Key:</p>
+            <p style="color:#aaa; margin-bottom:12px;">Hey ${name}! Payment successful. Here is your license key:</p>
             
             <div style="background:#1a1a1a; border:1px solid #333; border-radius:10px; padding:20px; text-align:center; margin-bottom:32px;">
               <p style="font-size:11px; color:#666; margin-bottom:8px; letter-spacing:1px;">LICENSE KEY</p>
@@ -69,7 +78,7 @@ export const POST = Webhooks({
               <li>SlapWindows.exe download it</li>
               <li>Open it</li>
               <li>Paste the upper key</li>
-              <li>slap your laptop 🎉</li>
+              <li>Slap your laptop 🎉</li>
             </ol>
 
             <a href="${process.env.NEXT_PUBLIC_DOWNLOAD_URL}" 
@@ -88,9 +97,20 @@ export const POST = Webhooks({
       });
 
       console.log(`[Webhook] Email sent to ${email}`);
+
     } catch (error) {
       console.error("[Webhook] Error:", error);
       throw error;
     }
-  },
-});
+
+    return NextResponse.json({ received: true });
+
+  } catch (error) {
+    if (error instanceof WebhookVerificationError) {
+      console.error("[Webhook] Invalid signature");
+      return NextResponse.json({ error: "Invalid webhook" }, { status: 403 });
+    }
+    console.error("[Webhook] Error:", error);
+    return NextResponse.json({ error: "Internal error" }, { status: 500 });
+  }
+}
