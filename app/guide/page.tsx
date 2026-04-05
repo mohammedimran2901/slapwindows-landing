@@ -34,7 +34,7 @@ export default function GuidePage() {
               pricing section
             </Link>{" "}
             on the homepage. Enter your name and email address, then click{" "}
-            <Strong>Get SlapWindows — $4</Strong>. You will be redirected to a
+            <Strong>Get SlapWindows — $1</Strong>. You will be redirected to a
             secure checkout page to complete your payment.
           </p>
           <Note type="info">

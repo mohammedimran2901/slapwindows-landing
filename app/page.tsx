@@ -11,6 +11,7 @@ export default function Home() {
   const [slapCount, setSlapCount] = useState(1247839);
   const [slapPopup, setSlapPopup] = useState("");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [isSlapping, setIsSlapping] = useState(false);
 
   const sounds = [
     "OUCH!!",
@@ -55,11 +56,20 @@ export default function Home() {
   ];
 
   const handleSlap = () => {
-    const word = sounds[Math.floor(Math.random() * sounds.length)];
-    setSlapPopup(word);
-    setSlapCount((c) => c + 1);
-    setTimeout(() => setSlapPopup(""), 800);
-  };
+  const word = sounds[Math.floor(Math.random() * sounds.length)];
+  setSlapPopup(word);
+  setSlapCount((c) => c + 1);
+  setTimeout(() => setSlapPopup(""), 800);
+
+  // Image rotate animation
+  setIsSlapping(true);
+  setTimeout(() => setIsSlapping(false), 300);
+
+  // Single sound
+  const audio = new Audio("/sound.wav");
+  audio.volume = 0.9;
+  audio.play().catch(() => {});
+};
 
   const handleBuy = async () => {
     if (!name.trim() || !email.trim()) {
@@ -147,7 +157,7 @@ export default function Home() {
                 boxShadow: "0 4px 14px rgba(230,53,53,0.35)",
               }}
             >
-              Buy $4
+              Buy $1
             </button>
           </div>
         </nav>
@@ -172,8 +182,22 @@ export default function Home() {
             ✦ Windows version of SlapMac
           </div>
           <div className="flex justify-center items-center">
-            <Image src={img} alt="img" height={700} width={700} />
-          </div>
+  <Image
+    src={img}
+    alt="SlapWindows laptop screaming"
+    height={700}
+    width={700}
+    onClick={handleSlap}
+    className="cursor-pointer select-none"
+    style={{
+      transform: isSlapping ? "rotate(-2deg) scale(0.95)" : "rotate(0deg) scale(1)",
+      transition: isSlapping
+        ? "transform 0.08s ease-in"
+        : "transform 0.25s ease-out",
+      filter: isSlapping ? "brightness(1.15)" : "brightness(1)",
+    }}
+  />
+</div>
 
           <h1
             className="text-[2.6rem] sm:text-5xl font-bold tracking-[-2px] mb-4"
@@ -196,7 +220,7 @@ export default function Home() {
                 boxShadow: "0 6px 24px rgba(230,53,53,0.4)",
               }}
             >
-              Get SlapWindows — $4
+              Get SlapWindows — $1
             </button>
             <button
               onClick={() => scrollTo("faq")}
@@ -497,7 +521,7 @@ export default function Home() {
               >
                 {loading
                   ? "Redirecting to payment..."
-                  : "👋 Get SlapWindows for $4"}
+                  : "👋 Get SlapWindows for $1"}
               </button>
             </div>
             <p className="text-[11px] text-[#ccc] mt-3 font-normal">
