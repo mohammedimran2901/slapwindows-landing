@@ -452,7 +452,7 @@ export default function Home() {
               <sup className="text-xl sm:text-2xl font-medium align-super">
                 $
               </sup>
-              4
+              1
             </div>
             <div className="text-xs sm:text-sm text-[#aaa] mb-6 font-medium">
               one-time payment · lifetime license · no refunds
