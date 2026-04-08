@@ -126,8 +126,9 @@ export default function Home() {
             background: "rgba(250,248,248,0.95)",
           }}
         >
+          
           <div className="text-base sm:text-lg font-bold tracking-tight">
-            SlapWindows
+            <a href="https://www.producthunt.com/products/slapwindows?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-slapwindows" target="_blank" rel="noopener noreferrer"><img alt="SlapWindows - Slap your Windows, it screams back | Product Hunt" width="250" height="54" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1113990&amp;theme=light&amp;t=1775621834233" /></a>
           </div>
           <div className="flex gap-3 sm:gap-6 items-center">
             <span
@@ -157,7 +158,7 @@ export default function Home() {
                 boxShadow: "0 4px 14px rgba(230,53,53,0.35)",
               }}
             >
-              Buy $1
+              Buy $3
             </button>
           </div>
         </nav>
@@ -220,7 +221,7 @@ export default function Home() {
                 boxShadow: "0 6px 24px rgba(230,53,53,0.4)",
               }}
             >
-              Get SlapWindows — $1
+              Get SlapWindows — $3
             </button>
             <button
               onClick={() => scrollTo("faq")}
@@ -452,7 +453,7 @@ export default function Home() {
               <sup className="text-xl sm:text-2xl font-medium align-super">
                 $
               </sup>
-              1
+              3
             </div>
             <div className="text-xs sm:text-sm text-[#aaa] mb-6 font-medium">
               one-time payment · lifetime license · no refunds
@@ -521,7 +522,7 @@ export default function Home() {
               >
                 {loading
                   ? "Redirecting to payment..."
-                  : "👋 Get SlapWindows for $1"}
+                  : "👋 Get SlapWindows for $3"}
               </button>
             </div>
             <p className="text-[11px] text-[#ccc] mt-3 font-normal">
