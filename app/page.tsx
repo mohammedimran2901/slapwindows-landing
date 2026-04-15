@@ -23,7 +23,7 @@ export default function Home() {
   ];
 
   const packs = [
-    { emoji: "💋", name: "Sexy", desc: "Use headphones" },
+    { emoji: "💋", name: "Special", desc: "Use headphones" },
     { emoji: "🥊", name: "Combo Hit", desc: "" },
     { emoji: "👨", name: "Male", desc: "" },
     { emoji: "💨", name: "Fart", desc: "" },
@@ -39,7 +39,7 @@ export default function Home() {
     },
     {
       q: "Does it work without a mic?",
-      a: "You need a microphone for slap detection. All Windows laptops have a built-in mic, so you're covered. USB Moaner mode works without mic.",
+      a: "You need a microphone for slap detection. All Windows laptops have a built-in mic, so you're covered. USB Sound Pack works without mic.",
     },
     {
       q: "How do I get my license key?",
@@ -305,7 +305,7 @@ export default function Home() {
             },
             {
               icon: "🔌",
-              title: "USB moaner",
+              title: "USB Sound Pack",
               desc: "Reacts on plug/unplug too",
             },
           ].map((f, i) => (
@@ -383,7 +383,7 @@ export default function Home() {
             Bonus feature
           </p>
           <h2 className="text-2xl sm:text-[1.8rem] font-bold tracking-[-1px] mb-3">
-            USB Moaner
+            USB Sound Pack
           </h2>
           <p className="text-sm sm:text-base text-[#999] mb-6 max-w-sm mx-auto font-normal">
             Plug or unplug a USB device. It moans. You&apos;re welcome.
@@ -400,7 +400,7 @@ export default function Home() {
             <div className="text-2xl sm:text-[32px] shrink-0">🔌</div>
             <div className="flex-1 min-w-0">
               <h3 className="text-sm sm:text-[15px] font-semibold mb-1">
-                USB Moaner mode
+                USB Sound Pack
               </h3>
               <p className="text-xs sm:text-[13px] text-[#999] leading-relaxed font-normal">
                 Your laptop reacts every time you connect or disconnect a
@@ -462,7 +462,7 @@ export default function Home() {
             <ul className="list-none text-left mb-8">
               {[
                 "All 7 voice packs",
-                "USB Moaner mode",
+                "USB Sound Pack mode",
                 "Lifetime updates",
                 "License key via email",
                 "Windows 10 & 11 support",

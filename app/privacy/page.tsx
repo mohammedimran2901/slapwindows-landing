@@ -88,13 +88,13 @@ export default function PrivacyPage() {
         <Section title="6. Purchase Data">
           <p>
             When you purchase SlapWindows, your payment is processed by{" "}
-            <a href="https://dodopayments.com" className="text-[#e63535] no-underline">
-              Dodo Payments
+            <a href="https://polar.sh/" className="text-[#e63535] no-underline">
+              Polar Payments
             </a>. We receive your email address
             in order to send your license key. We do not store your payment card details — those are handled
-            entirely by Dodo Payments. See{" "}
-            <a href="https://dodopayments.com/privacy" className="text-[#e63535] no-underline">
-              Dodo's privacy policy
+            entirely by Polar Payments. See{" "}
+            <a href="https://polar.sh/" className="text-[#e63535] no-underline">
+              Polar's privacy policy
             </a>.
           </p>
           <p className="mt-2">
@@ -106,7 +106,7 @@ export default function PrivacyPage() {
         <Section title="7. Third-Party Services">
           <ul className="list-disc pl-5 space-y-1">
             <li>
-              <strong>Dodo Payments</strong> — Payment processing and license management.
+              <strong>Polar Payments</strong> — Payment processing and license management.
             </li>
             <li>
               <strong>Resend</strong> — Used to send your license key email.

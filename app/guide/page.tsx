@@ -156,7 +156,7 @@ export default function GuidePage() {
             <div className="px-4 py-1.5 text-[#ccc]">Mute sounds</div>
             <div className="border-t border-[#222] my-1" />
             <div className="px-4 py-1.5 text-[#ccc] font-semibold">Sound Pack ►</div>
-            <div className="px-4 py-1.5 text-[#ccc]">USB Moaner: ON</div>
+            <div className="px-4 py-1.5 text-[#ccc]">USB Sound: ON</div>
             <div className="border-t border-[#222] my-1" />
             <div className="px-4 py-1.5 text-[#ccc]">Settings</div>
             <div className="px-4 py-1.5 text-[#ccc]">Quit SlapWindows</div>
@@ -199,7 +199,7 @@ export default function GuidePage() {
           <div className="bg-[#fafafa] border border-[#f0eded] rounded-xl px-5 py-5 mb-4">
             <p className="text-[12px] text-[#aaa] mb-3">Tray menu → Sound Pack</p>
             <div className="flex flex-col gap-1.5 text-[13px] text-[#888]">
-              <span>✓ <strong className="text-black font-semibold">Sexy</strong> — currently selected</span>
+              <span>✓ <strong className="text-black font-semibold">Special</strong> — currently selected</span>
               <span className="pl-4 text-[#bbb]">→ Random, Sound 1, Sound 2...</span>
               <span><strong className="text-black font-semibold">Combo Hit</strong> → Random, Sound 1...</span>
               <span><strong className="text-black font-semibold">Male</strong> → Random, Man-1, Man-2, Man-4...</span>
@@ -218,15 +218,15 @@ export default function GuidePage() {
 
           <Note type="tip">
             You can also open <Strong>Settings</Strong> from the tray to adjust
-            Sensitivity, Cooldown, Volume, and USB Moaner mode.
+            Sensitivity, Cooldown, Volume, and USB Sound mode.
           </Note>
 
           <div className="flex flex-col gap-2 mt-4">
-            <SettingRow name="Sound Pack" desc="Choose from 7 packs — Sexy, Combo Hit, Male, Fart, Gentleman, Yamete, Goat." />
+            <SettingRow name="Sound Pack" desc="Choose from 7 packs — Special, Combo Hit, Male, Fart, Gentleman, Yamete, Goat." />
             <SettingRow name="Sensitivity" desc="Controls how loud the impact needs to be. Increase if slaps aren't detected." />
             <SettingRow name="Cooldown" desc="Minimum time between two triggers. Prevents rapid-fire sounds." />
             <SettingRow name="Volume" desc="Master volume for all sound packs." />
-            <SettingRow name="USB Moaner" desc="Plays a sound every time you plug or unplug a USB device." />
+            <SettingRow name="USB Sound" desc="Plays a sound every time you plug or unplug a USB device." />
           </div>
         </Step>
 
