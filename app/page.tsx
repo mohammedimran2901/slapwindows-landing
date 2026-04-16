@@ -158,7 +158,7 @@ export default function Home() {
                 boxShadow: "0 4px 14px rgba(230,53,53,0.35)",
               }}
             >
-              Buy $5
+              Buy $3
             </button>
           </div>
         </nav>
@@ -221,7 +221,7 @@ export default function Home() {
                 boxShadow: "0 6px 24px rgba(230,53,53,0.4)",
               }}
             >
-              Get SlapWindows — $5
+              Get SlapWindows — $3
             </button>
             <button
               onClick={() => scrollTo("faq")}
@@ -453,7 +453,7 @@ export default function Home() {
               <sup className="text-xl sm:text-2xl font-medium align-super">
                 $
               </sup>
-              5
+              3
             </div>
             <div className="text-xs sm:text-sm text-[#aaa] mb-6 font-medium">
               one-time payment · lifetime license · no refunds
@@ -522,7 +522,7 @@ export default function Home() {
               >
                 {loading
                   ? "Redirecting to payment..."
-                  : "👋 Get SlapWindows for $5"}
+                  : "👋 Get SlapWindows for $3"}
               </button>
             </div>
             <p className="text-[11px] text-[#ccc] mt-3 font-normal">
