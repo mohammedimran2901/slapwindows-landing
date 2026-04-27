@@ -246,20 +246,6 @@ export default function Home() {
           <p className="text-xs text-[#aaa] mt-4 font-medium">
             Windows 10/11 · Microphone required · One-time payment
           </p>
-
-          <a
-            href="https://www.scrolllaunch.com/products/slapwindows?utm_source=badge&utm_medium=embed&utm_campaign=slapwindows&ref=scrolllaunch"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src="https://www.scrolllaunch.com/api/badge/slapwindows"
-              alt="Featured on ScrollLaunch"
-              width="220"
-              height="48"
-              loading="lazy"
-            />
-          </a>
         </section>
 
         {/* DEMO */}
@@ -590,9 +576,22 @@ export default function Home() {
 
         {/* FOOTER */}
         <footer
-          className="px-4 sm:px-8 py-8 text-center text-sm text-[#aaa]"
+          className="px-4 sm:px-8 py-8 text-center flex flex-col items-center text-sm text-[#aaa]"
           style={{ borderTop: "1px solid #ede8e8" }}
         >
+          <a
+            href="https://www.scrolllaunch.com/products/slapwindows?utm_source=badge&utm_medium=embed&utm_campaign=slapwindows&ref=scrolllaunch"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="https://www.scrolllaunch.com/api/badge/slapwindows"
+              alt="Featured on ScrollLaunch"
+              width="220"
+              height="48"
+              loading="lazy"
+            />
+          </a>
           <p className="font-medium">
             built with frustration by someone whose laptop had it coming
           </p>
