@@ -56,20 +56,20 @@ export default function Home() {
   ];
 
   const handleSlap = () => {
-  const word = sounds[Math.floor(Math.random() * sounds.length)];
-  setSlapPopup(word);
-  setSlapCount((c) => c + 1);
-  setTimeout(() => setSlapPopup(""), 800);
+    const word = sounds[Math.floor(Math.random() * sounds.length)];
+    setSlapPopup(word);
+    setSlapCount((c) => c + 1);
+    setTimeout(() => setSlapPopup(""), 800);
 
-  // Image rotate animation
-  setIsSlapping(true);
-  setTimeout(() => setIsSlapping(false), 300);
+    // Image rotate animation
+    setIsSlapping(true);
+    setTimeout(() => setIsSlapping(false), 300);
 
-  // Single sound
-  const audio = new Audio("/sound.wav");
-  audio.volume = 0.9;
-  audio.play().catch(() => {});
-};
+    // Single sound
+    const audio = new Audio("/sound.wav");
+    audio.volume = 0.9;
+    audio.play().catch(() => {});
+  };
 
   const handleBuy = async () => {
     if (!name.trim() || !email.trim()) {
@@ -126,9 +126,19 @@ export default function Home() {
             background: "rgba(250,248,248,0.95)",
           }}
         >
-          
           <div className="text-base sm:text-lg font-bold tracking-tight">
-            <a href="https://www.producthunt.com/products/slapwindows?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-slapwindows" target="_blank" rel="noopener noreferrer"><img alt="SlapWindows - Slap your Windows, it screams back | Product Hunt" width="250" height="54" src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1113990&amp;theme=light&amp;t=1775621834233" /></a>
+            <a
+              href="https://www.producthunt.com/products/slapwindows?embed=true&amp;utm_source=badge-featured&amp;utm_medium=badge&amp;utm_campaign=badge-slapwindows"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                alt="SlapWindows - Slap your Windows, it screams back | Product Hunt"
+                width="250"
+                height="54"
+                src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=1113990&amp;theme=light&amp;t=1775621834233"
+              />
+            </a>
           </div>
           <div className="flex gap-3 sm:gap-6 items-center">
             <span
@@ -183,22 +193,24 @@ export default function Home() {
             ✦ Windows version of SlapMac
           </div>
           <div className="flex justify-center items-center">
-  <Image
-    src={img}
-    alt="SlapWindows laptop screaming"
-    height={700}
-    width={700}
-    onClick={handleSlap}
-    className="cursor-pointer select-none"
-    style={{
-      transform: isSlapping ? "rotate(-2deg) scale(0.95)" : "rotate(0deg) scale(1)",
-      transition: isSlapping
-        ? "transform 0.08s ease-in"
-        : "transform 0.25s ease-out",
-      filter: isSlapping ? "brightness(1.15)" : "brightness(1)",
-    }}
-  />
-</div>
+            <Image
+              src={img}
+              alt="SlapWindows laptop screaming"
+              height={700}
+              width={700}
+              onClick={handleSlap}
+              className="cursor-pointer select-none"
+              style={{
+                transform: isSlapping
+                  ? "rotate(-2deg) scale(0.95)"
+                  : "rotate(0deg) scale(1)",
+                transition: isSlapping
+                  ? "transform 0.08s ease-in"
+                  : "transform 0.25s ease-out",
+                filter: isSlapping ? "brightness(1.15)" : "brightness(1)",
+              }}
+            />
+          </div>
 
           <h1
             className="text-[2.6rem] sm:text-5xl font-bold tracking-[-2px] mb-4"
@@ -234,6 +246,20 @@ export default function Home() {
           <p className="text-xs text-[#aaa] mt-4 font-medium">
             Windows 10/11 · Microphone required · One-time payment
           </p>
+
+          <a
+            href="https://www.scrolllaunch.com/products/slapwindows?utm_source=badge&utm_medium=embed&utm_campaign=slapwindows&ref=scrolllaunch"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="https://www.scrolllaunch.com/api/badge/slapwindows"
+              alt="Featured on ScrollLaunch"
+              width="220"
+              height="48"
+              loading="lazy"
+            />
+          </a>
         </section>
 
         {/* DEMO */}
