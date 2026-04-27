@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -23,6 +23,65 @@ export const metadata: Metadata = {
     "mic detection",
     "novelty app",
     "one time payment",
+    "slapwindows app",
+    "slap windows",
+    "slap windows laptop",
+    "slapwindows.site",
+
+    // Core Feature Keywords
+    "slap laptop",
+    "laptop screams back",
+    "laptop scream app",
+    "laptop prank app",
+    "laptop sound reaction",
+    "laptop moan app",
+    "slap your laptop",
+    "laptop with feelings",
+
+    // Competitor / Inspired Keywords (High Traffic)
+    "slapmac for windows",
+    "slapmac windows version",
+    "slapmac alternative",
+    "slapmac windows",
+
+    // Feature Specific
+    "usb moaner windows",
+    "usb plug sound effect",
+    "mic detection laptop sound",
+    "windows system tray app",
+    "laptop voice packs",
+    "funny sound packs windows",
+
+    // Platform Keywords
+    "windows 10 prank app",
+    "windows 11 prank app",
+    "funny windows app 2026",
+    "windows novelty app",
+    "windows funny software",
+    "best windows apps 2026",
+
+    // Long Tail Keywords
+    "app that makes laptop scream when slapped",
+    "windows app that screams when you slap it",
+    "how to make laptop scream windows",
+    "laptop prank software for windows",
+    "funny app for windows laptop",
+    "windows app usb moaner mode",
+
+    // Viral / Social Keywords
+    "laptop prank",
+    "office prank app",
+    "tech humor app",
+    "funny tech app",
+    "viral laptop app",
+    "indie app 2026",
+
+    "slap windows",
+    "Slap windows download",
+    "Slap Mac for Windows",
+    "Slap windows free",
+    "Slap windows tiktok",
+    "Slap Mac license key",
   ],
   authors: [{ name: "amitkushh", url: "https://x.com/amitkushh" }],
   creator: "amitkushh",
@@ -74,8 +133,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
-      {children}
-      <Analytics />
+        {children}
+        <Analytics />
       </body>
     </html>
   );
