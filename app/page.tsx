@@ -248,6 +248,42 @@ export default function Home() {
           </p>
         </section>
 
+        {/* VIDEO PREVIEW */}
+        <section
+          className="px-4 sm:px-8 py-8 sm:py-12"
+          style={{ borderBottom: "1px solid #ede8e8" }}
+        >
+          <div
+            className="py-10 sm:py-12 rounded-3xl"
+            style={{
+              background: "#fff",
+              border: "1px solid #ede8e8",
+              boxShadow: "0 2px 24px rgba(0,0,0,0.04)",
+            }}
+          >
+            <p className="text-xs font-bold text-[#e63535] tracking-widest uppercase mb-3 text-center">
+              Preview
+            </p>
+
+            <section className="w-full flex flex-col items-center px-4 py-10">
+              <h2 className="text-2xl font-bold text-center mb-6">
+                👀 See It In Action
+              </h2>
+
+              {/* Shorts = Vertical Video */}
+              <div className="relative w-70 h-125 sm:w-78.75 sm:h-140 rounded-2xl overflow-hidden shadow-2xl">
+                <iframe
+                  className="absolute top-0 left-0 w-full h-full"
+                  src="https://www.youtube.com/embed/KqsnOdI2EM4"
+                  title="SlapWindows Demo"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            </section>
+          </div>
+        </section>
+
         {/* DEMO */}
         <section
           className="px-4 sm:px-8 py-8 sm:py-12"
