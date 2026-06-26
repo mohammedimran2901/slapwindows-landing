@@ -1,18 +1,14 @@
-import mongoose from "mongoose";
+import { createClient } from "@supabase/supabase-js";
 
-const MONGODB_URI = process.env.MONGODB_URI!;
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY!;
 
-if (!MONGODB_URI) throw new Error("MONGODB_URI missing in .env.local");
-
-let cached = (global as any).mongoose || { conn: null, promise: null };
-
-export default async function dbConnect() {
-  if (cached.conn) return cached.conn;
-
-  if (!cached.promise) {
-    cached.promise = mongoose.connect(MONGODB_URI).then((m) => m);
-  }
-
-  cached.conn = await cached.promise;
-  return cached.conn;
+if (!supabaseUrl || !supabaseServiceKey) {
+  throw new Error("Missing Supabase env vars: NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY");
 }
+
+const supabase = createClient(supabaseUrl, supabaseServiceKey, {
+  auth: { autoRefreshToken: false, persistSession: false },
+});
+
+export default supabase;
