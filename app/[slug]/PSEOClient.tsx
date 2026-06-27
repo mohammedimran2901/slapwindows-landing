@@ -449,7 +449,6 @@ export default function PSEOClient({ page }: { page: PSEOPage }) {
         </p>
         <p className="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1">
           {[
-            ["built with love by amitkushh", "https://x.com/amitkushh/"],
             ["Privacy", "/privacy"],
             ["Terms", "/terms"],
             ["Guide", "/guide"],

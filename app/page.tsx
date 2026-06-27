@@ -956,8 +956,7 @@ export default function Home() {
           </p>
           <p className="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1">
             {[
-              ["built with 👋 by amitkushh", "https://x.com/amitkushh/"],
-              ["Privacy", "/privacy"],
+                            ["Privacy", "/privacy"],
               ["Terms", "/terms"],
               ["Guide", "/guide"],
               ["Support", "mailto:amitkush.dev@gmail.com"],
